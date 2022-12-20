@@ -14,9 +14,10 @@
                 "RSYNC_MODULE_PATH": "/tank/rsync-backup/test"
             },
             "args": [
+                "--debug",
                 "--schema",
-                "tests/data/schema.conf",
-                "normal"
+                "tests/data/schema2.conf",
+                "daily2"
             ]
         },
         {
@@ -35,7 +36,14 @@
                 "-vvvvf",
                 "tests"
             ]
-
+        },
+        {
+            "name": "Report",
+            "type": "python",
+            "request": "launch",
+            "module": "coverage",
+            "args": ["xml"]
         }
+
     ]
 }

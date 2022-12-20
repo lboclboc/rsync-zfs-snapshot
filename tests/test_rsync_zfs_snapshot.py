@@ -40,7 +40,8 @@ class TestRsyncZFSSnapshot(unittest.TestCase):
         self.zfsapi.create_filesystem_snapshot.assert_called_once_with(TESTVOL, "daily-2022-12-24")
 
     def test_too_many_exists(self):
-        self.zfsapi.list_filesystem_snapshots = MagicMock(name="list_filsystem_snapshots", return_value=["daily-2022-12-22", "daily-2022-12-23", "daily-2022-12-24"])
+        self.zfsapi.list_filesystem_snapshots = MagicMock(name="list_filsystem_snapshots",
+                                                          return_value=["daily-2022-12-21", "daily-2022-12-22", "daily-2022-12-23"])
         self.zfsapi.create_filesystem_snapshot = MagicMock(name="create_filsystem_snapshot", return_value=[])
         self.zfsapi.destroy_filesystem_snapshot = MagicMock(name="destroy_filsystem_snapshot", return_value=[])
 
@@ -48,5 +49,5 @@ class TestRsyncZFSSnapshot(unittest.TestCase):
 
         self.zfsapi.list_filesystem_snapshots.assert_called_once_with(TESTVOL)
         self.zfsapi.create_filesystem_snapshot.assert_called_once_with(TESTVOL, "daily-2022-12-24")
-        self.zfsapi.destroy_filesystem_snapshot.assert_called_once_with(TESTVOL, "daily-2022-12-22")
+        self.zfsapi.destroy_filesystem_snapshot.assert_called_once_with(TESTVOL, "daily-2022-12-21")
 

@@ -1,4 +1,5 @@
 import argparse
+import logging
 import os
 from rsync_zfs_snapshot.rsync_zfs_snapshot import RsyncZFSnapshot
 from rsync_zfs_snapshot.zfsapi import ZFSAPI
@@ -9,7 +10,7 @@ RSYNC_MODULE_PATH = os.getenv("RSYNC_MODULE_PATH")
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description="rsync zfs snapshot handler")
-    parser.add_argument("-d", default=False, action="store_true", help="turn on debugging")
+    parser.add_argument("-d", "--debug", default=False, action="store_true", help="turn on debugging")
     parser.add_argument("--schema", default="/etc/rsync-zfs-snapshot/schema.conf", help="schema database")
     parser.add_argument("schema_name", nargs=1, type=str, help="name of schema in schema database to use for snapshot")
     return parser.parse_args()
@@ -19,6 +20,8 @@ def main():
         raise RuntimeError(f"This script should only be started by rsync daemon")
 
     args = parse_arguments()
+    if args.debug:
+        logging.basicConfig(level=logging.DEBUG)
     zfsapi = ZFSAPI()
 
     filesystem = zfsapi.get_filesystem_for_path(RSYNC_MODULE_PATH)
