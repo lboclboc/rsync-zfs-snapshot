@@ -1,16 +1,15 @@
 import setuptools
-from rsync-zfs-snapshot
-import os
+import rsync_zfs_snapshot
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="zfs_autobackup",
-    version=ZfsAutobackup.VERSION,
-    author="Edwin Eefting",
-    author_email="edwin@datux.nl",
-    description="ZFS autobackup is used to periodicly backup ZFS filesystems to other locations. It tries to be the most friendly to use and easy to debug ZFS backup tool.",
+    name="rsync_zfs_snapshot",
+    version=rsync_zfs_snapshot.VERSION,
+    author="Lars Berntzon",
+    author_email="lars.berntzon@cecilia-data.se",
+    description="Snapshotting tool for use when using rsync to a zfs-based disk backup server.",
     long_description=long_description,
     long_description_content_type="text/markdown",
 
@@ -18,9 +17,7 @@ setuptools.setup(
     entry_points={
         'console_scripts':
             [
-                'zfs-autobackup = zfs_autobackup.ZfsAutobackup:cli',
-                'zfs-autoverify = zfs_autobackup.ZfsAutoverify:cli',
-                'zfs-check = zfs_autobackup.ZfsCheck:cli',
+                'rsync-zfs-snapshot = rsync_zfs_snapshot.RsyncZFSSnapshot:main',
             ]
     },
     packages=setuptools.find_packages(),
@@ -31,9 +28,9 @@ setuptools.setup(
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=2.7',
-    install_requires=[
-        "colorama",
-        "argparse"
-    ]
+    python_requires='>=3.6',
+#    install_requires=[
+#        "colorama",
+#        "argparse"
+#    ]
 )
