@@ -26,6 +26,11 @@ class TestSchema(unittest.TestCase):
         self.assertEqual(s.get_count("critical", "monthly"), 12)
         self.assertEqual(s.get_count("critical", "yearly"), 3)
 
+    def test_illegal_section(self):
+        with self.assertRaises(RuntimeError):
+            s = Schema(EXAMPLE)
+            s.get_count("nosuch", "unknown")
+
     def test_illegal_label(self):
         with self.assertRaises(RuntimeError):
             s = Schema(EXAMPLE)

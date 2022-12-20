@@ -10,7 +10,8 @@ RSYNC_MODULE_PATH = os.getenv("RSYNC_MODULE_PATH")
 def parse_arguments():
     parser = argparse.ArgumentParser(description="rsync zfs snapshot handler")
     parser.add_argument("-d", default=False, action="store_true", help="turn on debugging")
-    parser.add_argument("schema_name", nargs=1, type=str, help="name of schema to use for snapshots")
+    parser.add_argument("--schema", default="/etc/rsync-zfs-snapshot/schema.conf", help="schema database")
+    parser.add_argument("schema_name", nargs=1, type=str, help="name of schema in schema database to use for snapshot")
     return parser.parse_args()
 
 def main():
@@ -24,11 +25,11 @@ def main():
     if not filesystem:
         raise RuntimeError(f"Not a zfs mount: {RSYNC_MODULE_PATH}")
 
-    schema = Schema()
+    schema = Schema(args.schema)
 
     snapshoter = RsyncZFSnapshot(zfsapi=zfsapi, schema=schema)
 
-    snapshoter.manage_snapshots(filesystem, args.schema_name)
+    snapshoter.manage_snapshots(filesystem, args.schema_name[0])
 
     print(filesystem)
 

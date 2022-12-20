@@ -1,0 +1,41 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run main",
+            "type": "python",
+            "request": "launch",
+            "module": "rsync_zfs_snapshot",
+            "justMyCode": false,
+            "env": {
+                "RSYNC_MODULE_PATH": "/tank/rsync-backup/test"
+            },
+            "args": [
+                "--schema",
+                "tests/data/schema.conf",
+                "normal"
+            ]
+        },
+        {
+            "name": "Tests",
+            "type": "python",
+            "request": "launch",
+            "module": "coverage",
+            "args": [
+                "run",
+                "--branch",
+                "--source",
+                "rsync_zfs_snapshot",
+                "-m",
+                "unittest",
+                "discover",
+                "-vvvvf",
+                "tests"
+            ]
+
+        }
+    ]
+}
