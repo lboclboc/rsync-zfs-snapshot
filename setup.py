@@ -17,7 +17,7 @@ setuptools.setup(
     entry_points={
         'console_scripts':
             [
-                'rsync-zfs-snapshot = rsync_zfs_snapshot.RsyncZFSSnapshot:main',
+                'rsync-zfs-snapshot = rsync_zfs_snapshot.__main__:main',
             ]
     },
     packages=setuptools.find_packages(),
