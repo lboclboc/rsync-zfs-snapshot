@@ -50,6 +50,7 @@ class RsyncZFSnapshot:
             snapshot_name = f"{schedule}-{datestring}"
             if snapshot_name not in all_snapshots:
                 self.zfsapi.create_filesystem_snapshot(filesystem, snapshot_name)
+                all_snapshots.append(snapshot_name)
                 logging.debug(f"created snapshot {snapshot_name} for {filesystem}")
             else:
                 logging.debug(f"snapshot {snapshot_name} already exist for {filesystem}")
