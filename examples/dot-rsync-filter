@@ -1,0 +1,25 @@
+- /bin
+- /boot
+- /dev
+- /initrd.img
+- /lib
+- /lib64
+- /lib32
+- /lost+found
+- /media
+- /mnt
+- /proc
+- /run
+- /sbin
+- /sys
+- /usr
+- /tmp
+- /vmlinuz
++ /var/lib
+- /var/*
+# Example of backing up a database but ignoring rest of var
+#+ /var/lib/nice-db
+#- /var/lib/*
+- /swapfile
+- /root/.cache
+- /snap
